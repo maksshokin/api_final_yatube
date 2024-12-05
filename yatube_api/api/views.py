@@ -48,9 +48,6 @@ class FollowViewSet(viewsets.ModelViewSet):
     serializer_class = FollowSerializer
     pagination_class = pagination.LimitOffsetPagination
 
-    filter_backends = (SearchFilter,)
-    search_fields = ('following__username', 'user__username',)
-
 
 class UserViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = User.objects.all()
