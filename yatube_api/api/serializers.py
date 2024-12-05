@@ -78,4 +78,13 @@ class FollowSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Follow
-        fields =('user', 'following')
+        fields = ('user', 'following')
+
+    def perform_create(self, serializer):
+        return serializer.save(user=self.request.user)
+
+
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ('following', 'follofwer')
