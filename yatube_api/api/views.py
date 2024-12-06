@@ -5,7 +5,13 @@ from rest_framework import pagination
 from rest_framework.filters import SearchFilter
 
 from api.permissions import IsAuthor
-from api.serializers import CommentSerializer, FollowSerializer, GroupSerializer, PostSerializer, UserSerializer
+from api.serializers import (
+    CommentSerializer,
+    FollowSerializer,
+    GroupSerializer,
+    PostSerializer,
+    UserSerializer
+)
 from posts.models import Follow, Group, Post, User
 
 
@@ -21,7 +27,7 @@ class PostViewSet(viewsets.ModelViewSet):
 class GroupViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Group.objects.all()
     serializer_class = GroupSerializer
-    permission_classes = (permissions.IsAuthenticated,)
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
 
 
 class CommentViewSet(viewsets.ModelViewSet):
