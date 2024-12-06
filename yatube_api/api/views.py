@@ -1,7 +1,9 @@
 from django.shortcuts import get_object_or_404
+from requests import Response
 from rest_framework import permissions
 from rest_framework import viewsets
 from rest_framework import pagination
+from rest_framework import status
 from rest_framework.filters import SearchFilter
 
 from api.permissions import IsAuthor
@@ -11,7 +13,7 @@ from api.serializers import (
     GroupSerializer,
     PostSerializer,
 )
-from posts.models import Follow, Group, Post, User
+from posts.models import Follow, Group, Post
 
 
 class PostViewSet(viewsets.ModelViewSet):

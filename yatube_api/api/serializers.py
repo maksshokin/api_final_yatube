@@ -1,4 +1,5 @@
 from rest_framework import serializers
+from rest_framework.validators import UniqueTogetherValidator
 
 from posts.models import Comment, Group, Post, User, Follow
 
@@ -76,11 +77,18 @@ class FollowSerializer(serializers.ModelSerializer):
         queryset=User.objects.all()
     )
 
+    validators = [
+        UniqueTogetherValidator(
+            queryset=Follow.objects.all(),
+            fields=['user', 'following']
+        )
+    ]
+    
     class Meta:
         model = Follow
         fields = ('user', 'following')
 
     def validate(self, data):
-        if data['user'] == data['following']:
+        if self.context['request'].user == data.get('following'):
             raise serializers.ValidationError()
         return data
