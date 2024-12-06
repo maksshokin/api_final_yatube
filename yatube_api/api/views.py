@@ -1,9 +1,7 @@
 from django.shortcuts import get_object_or_404
-from requests import Response
 from rest_framework import permissions
 from rest_framework import viewsets
 from rest_framework import pagination
-from rest_framework import status
 from rest_framework.filters import SearchFilter
 
 from api.permissions import IsAuthor
@@ -51,6 +49,7 @@ class CommentViewSet(viewsets.ModelViewSet):
     def get_queryset(self):
         return self.get_post().comments.all()
 
+
 class FollowViewSet(viewsets.ModelViewSet):
     queryset = Follow.objects.all()
     serializer_class = FollowSerializer
@@ -61,6 +60,6 @@ class FollowViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
         return self.request.user.follower.all()
-    
+
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)

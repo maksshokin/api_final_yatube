@@ -20,7 +20,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'djoser',
     'api',
-    'posts',  
+    'posts',
 ]
 
 MIDDLEWARE = [
@@ -106,4 +106,3 @@ SIMPLE_JWT = {
 }
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-

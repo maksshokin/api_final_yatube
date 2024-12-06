@@ -15,7 +15,6 @@ class Follow(models.Model):
         on_delete=models.CASCADE,
         related_name='following'
     )
-    
 
     class Meta:
         constraints = (
@@ -58,7 +57,8 @@ class Post(models.Model):
         Group,
         on_delete=models.SET_NULL,
         related_name='posts',
-         blank=True, null=True
+        blank=True,
+        null=True
     )
 
     def __str__(self):
