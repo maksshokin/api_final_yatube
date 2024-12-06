@@ -1,4 +1,3 @@
-from rest_framework.authtoken import views
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
@@ -19,7 +18,6 @@ v1_router.register('v1/follow', FollowViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('v1/api-token-auth/', views.obtain_auth_token),
     path('', include(v1_router.urls)),
 ]
 

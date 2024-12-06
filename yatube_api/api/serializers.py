@@ -80,8 +80,10 @@ class FollowSerializer(serializers.ModelSerializer):
         model = Follow
         fields = ('user', 'following')
 
-    def perform_create(self, serializer):
-        return serializer.save(user=self.request.user)
+    def validate(self, data):
+        if data['user'] == data['following']:
+            raise serializers.ValidationError()
+        return data
 
 
 class UserSerializer(serializers.ModelSerializer):
