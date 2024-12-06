@@ -5,11 +5,6 @@ from posts.models import Comment, Group, Post, User, Follow
 
 
 class PostSerializer(serializers.ModelSerializer):
-    group = serializers.SlugRelatedField(
-        slug_field='slug',
-        queryset=Group.objects.all(),
-        required=False
-    )
     comment = serializers.SlugRelatedField(
         slug_field='slug',
         queryset=Comment.objects.all(),
