@@ -10,7 +10,6 @@ from api.serializers import (
     FollowSerializer,
     GroupSerializer,
     PostSerializer,
-    UserSerializer
 )
 from posts.models import Follow, Group, Post, User
 
@@ -19,6 +18,7 @@ class PostViewSet(viewsets.ModelViewSet):
     queryset = Post.objects.all()
     serializer_class = PostSerializer
     permission_classes = (IsAuthor, permissions.IsAuthenticatedOrReadOnly,)
+    pagination_class = pagination.LimitOffsetPagination
 
     def perform_create(self, serializer):
         serializer.save(author=self.request.user)
@@ -62,8 +62,3 @@ class FollowViewSet(viewsets.ModelViewSet):
     
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
-
-
-class UserViewSet(viewsets.ReadOnlyModelViewSet):
-    queryset = User.objects.all()
-    serializer_class = UserSerializer

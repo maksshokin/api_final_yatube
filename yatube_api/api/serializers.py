@@ -84,9 +84,3 @@ class FollowSerializer(serializers.ModelSerializer):
         if data['user'] == data['following']:
             raise serializers.ValidationError()
         return data
-
-
-class UserSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = User
-        fields = ('following', 'follofwer')
