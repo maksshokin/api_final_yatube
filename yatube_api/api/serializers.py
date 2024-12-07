@@ -16,27 +16,13 @@ class PostSerializer(serializers.ModelSerializer):
     )
 
     class Meta:
-        fields = (
-            'id',
-            'text',
-            'author',
-            'image',
-            'pub_date',
-            'group',
-            'comment',
-        )
-        read_only_fields = ('author',)
+        fields = "__all__"
         model = Post
 
 
 class GroupSerializer(serializers.ModelSerializer):
     class Meta:
-        fields = (
-            'id',
-            'description',
-            'title',
-            'slug',
-        )
+        fields = "__all__"
         model = Group
 
 
@@ -50,13 +36,7 @@ class CommentSerializer(serializers.ModelSerializer):
     )
 
     class Meta:
-        fields = (
-            'id',
-            'text',
-            'author',
-            'created',
-            'post',
-        )
+        fields = "__all__"
         read_only_fields = ('author',)
         model = Comment
 
@@ -72,18 +52,18 @@ class FollowSerializer(serializers.ModelSerializer):
         queryset=User.objects.all()
     )
 
-    validators = [
+    class Meta:
+        model = Follow
+        fields = "__all__"
+
+        validators = [
         UniqueTogetherValidator(
             queryset=Follow.objects.all(),
             fields=['user', 'following']
         )
     ]
 
-    class Meta:
-        model = Follow
-        fields = ('user', 'following')
-
-    def validate(self, data):
-        if self.context['request'].user == data.get('following'):
+    def validate_following(self, value):
+        if value == self.context["request"].user:
             raise serializers.ValidationError()
-        return data
+        return value

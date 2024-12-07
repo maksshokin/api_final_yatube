@@ -4,6 +4,7 @@ from rest_framework import viewsets
 from rest_framework import pagination
 from rest_framework.filters import SearchFilter
 
+from api.mixins import MyViewSet
 from api.permissions import IsAuthor
 from api.serializers import (
     CommentSerializer,
@@ -50,13 +51,11 @@ class CommentViewSet(viewsets.ModelViewSet):
         return self.get_post().comments.all()
 
 
-class FollowViewSet(viewsets.ModelViewSet):
-    queryset = Follow.objects.all()
+class FollowViewSet(MyViewSet):
     serializer_class = FollowSerializer
-    pagination_class = pagination.LimitOffsetPagination
     permission_classes = (permissions.IsAuthenticated,)
     filter_backends = (SearchFilter,)
-    search_fields = ('following__username',)
+    search_fields = ('user__username', 'following__username')
 
     def get_queryset(self):
         return self.request.user.follower.all()
