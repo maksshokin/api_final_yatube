@@ -67,6 +67,7 @@ class Post(models.Model):
     class Meta:
         ordering = ['pub_date']
 
+
 class Comment(models.Model):
     author = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name='comments'
