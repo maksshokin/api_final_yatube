@@ -16,13 +16,13 @@ class PostSerializer(serializers.ModelSerializer):
     )
 
     class Meta:
-        fields = "__all__"
+        fields = '__all__'
         model = Post
 
 
 class GroupSerializer(serializers.ModelSerializer):
     class Meta:
-        fields = "__all__"
+        fields = '__all__'
         model = Group
 
 
@@ -36,8 +36,7 @@ class CommentSerializer(serializers.ModelSerializer):
     )
 
     class Meta:
-        fields = "__all__"
-        read_only_fields = ('author',)
+        fields = '__all__'
         model = Comment
 
 
@@ -54,7 +53,7 @@ class FollowSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Follow
-        fields = "__all__"
+        fields = '__all__'
 
         validators = [
             UniqueTogetherValidator(

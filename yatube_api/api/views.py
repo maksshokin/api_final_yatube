@@ -4,7 +4,7 @@ from rest_framework import viewsets
 from rest_framework import pagination
 from rest_framework.filters import SearchFilter
 
-from api.mixins import MyViewSet
+from api.mixins import FollowsViewSet
 from api.permissions import IsAuthor
 from api.serializers import (
     CommentSerializer,
@@ -51,7 +51,7 @@ class CommentViewSet(viewsets.ModelViewSet):
         return self.get_post().comments.all()
 
 
-class FollowViewSet(MyViewSet):
+class FollowViewSet(FollowsViewSet):
     serializer_class = FollowSerializer
     permission_classes = (permissions.IsAuthenticated,)
     filter_backends = (SearchFilter,)
